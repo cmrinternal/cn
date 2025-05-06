@@ -1,0 +1,52 @@
+week7
+MAX_BLOCKS = 32
+bitmap = [0] * MAX_BLOCKS
+
+print("********** Bit Map Protocol **********")
+print("Menu:")
+print("1. Allocate Block")
+print("2. Deallocate Block")
+print("3. Display Bitmap")
+print("4. Show Menu Again")
+print("5. Exit")
+
+while True:
+    choice = int(input("\nEnter your choice: "))
+
+    if choice == 1:
+        for i in range(MAX_BLOCKS):
+            if bitmap[i] == 0:
+                bitmap[i] = 1
+                print(f"Allocated Block: {i}")
+                break
+        else:
+            print("No Free Blocks Available.")
+
+    elif choice == 2:
+        block = int(input(f"Enter block number to deallocate (0 - {MAX_BLOCKS - 1}): "))
+        if 0 <= block < MAX_BLOCKS:
+            if bitmap[block] == 1:
+                bitmap[block] = 0
+                print(f"Block {block} deallocated.")
+            else:
+                print(f"Block {block} is already free.")
+        else:
+            print("Invalid block number.")
+
+    elif choice == 3:
+        print("Current Bitmap:", *bitmap)
+
+    elif choice == 4:
+        print("\nMenu:")
+        print("1. Allocate Block")
+        print("2. Deallocate Block")
+        print("3. Display Bitmap")
+        print("4. Show Menu Again")
+        print("5. Exit")
+
+    elif choice == 5:
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid choice. Try again.")
