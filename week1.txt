@@ -1,0 +1,29 @@
+week1 
+charterstuffing
+a = input("Enter the string: ")
+c = ""
+i = 0
+
+while i < len(a):
+    if a[i:i+3] == "DLE":
+        c += "DLED"
+        i += 3
+    else:
+        c += a[i]
+        i += 1
+
+print("DLESTX" + c + "DLEETX")
+bitstufing:
+input_str = input()
+output = ""
+count = 0
+for i in range(len(input_str)):
+    output += input_str[i]
+    if input_str[i] == '1':
+        count += 1
+    else:
+        count = 0
+    if count == 5:
+        output += '0'
+        count = 0
+print(output)
