@@ -1,0 +1,49 @@
+INFINITY = 9999
+n = int(input("Enter number of vertices: "))
+
+print("Enter weighted matrix (0 for no path):")
+adj = []
+for i in range(n):
+    row = list(map(int, input().split()))
+    adj.append(row)
+
+path = []
+for i in range(n):
+    row = []
+    for j in range(n):
+        if i == j or adj[i][j] != 0:
+            row.append(adj[i][j])
+        else:
+            row.append(INFINITY)
+    path.append(row)
+
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            if path[i][k] != INFINITY and path[k][j] != INFINITY:
+                path[i][j] = min(path[i][j], path[i][k] + path[k][j])
+
+print("\nShortest path matrix:")
+for i in range(n):
+    for j in range(n):
+        if path[i][j] == INFINITY:
+            print("INF", end="   ")
+        else:
+            print(f"{path[i][j]:3}", end="   ")
+    print()
+
+while True:
+    vertices = input("\nEnter start and end vertex (separated by space): ").split()
+    if len(vertices) == 2 and vertices[0].isdigit() and vertices[1].isdigit():
+        start, end = int(vertices[0]), int(vertices[1])
+        if 0 <= start < n and 0 <= end < n:
+            break
+        else:
+            print(f"Please enter valid vertex numbers between 0 and {n-1}.")
+    else:
+        print("Invalid input. Please enter two vertex numbers separated by a space.")
+
+if path[start][end] == INFINITY:
+    print(f"The minimum cost between {start} and {end} is INF")
+else:
+    print(f"The minimum cost between {start} and {end} is {path[start][end]}")
