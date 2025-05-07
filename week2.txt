@@ -1,37 +1,32 @@
-week2:
-poly = input("Enter the polynomial in binary (e.g., 110101): ").strip()
-generator = input("Enter the generator polynomial (e.g., 1101): ").strip()
-
-initial_data = int(poly, 2)
-gen = int(generator, 2)
-gen_len = len(generator)
-data = initial_data << (gen_len - 1)
-frame_len = len(poly) + gen_len - 1
-print("\nFRAME after appending 0's:", format(data, f'0{frame_len}b'))
+poly = input("Enter polynomial (e.g., 110101): ").strip()
+gen = input("Enter generator (e.g., 1101): ").strip()
+g, Lg = int(gen, 2), len(gen)
+data = int(poly, 2) << (Lg - 1)
+flen = len(poly) + Lg - 1
+print("\nFRAME after appending 0's:", format(data, f'0{flen}b'))
 
 for i in range(len(poly)):
-    pos = frame_len - 1 - i
+    pos = flen - 1 - i
     if data & (1 << pos):
-        data ^= gen << (pos - (gen_len - 1))
+        data ^= g << (pos - (Lg - 1))
 
-remainder = format(data & ((1 << (gen_len - 1)) - 1), f'0{gen_len-1}b')
-print("\nThe REMAINDER is:", remainder)
+rem = format(data & ((1 << (Lg - 1)) - 1), f'0{Lg-1}b')
+print("\nThe REMAINDER is:", rem)
 
-transmitted_frame = poly + remainder
-print("\nTransmitting FRAME...\n\nTransmitted FRAME is:", transmitted_frame)
+tf = poly + rem
+print("\nTransmitting FRAME...\n\nTransmitted FRAME is:", tf)
 
-print("\nChecking for errors...\n\nReceived FRAME:", transmitted_frame)
-data = int(transmitted_frame, 2)
-frame_len = len(transmitted_frame)
+print("\nChecking for errors...\n\nReceived FRAME:", tf)
+data = int(tf, 2)
+flen = len(tf)
 
-for i in range(frame_len - gen_len + 1):
-    pos = frame_len - 1 - i
+for i in range(flen - Lg + 1):
+    pos = flen - 1 - i
     if data & (1 << pos):
-        data ^= gen << (pos - (gen_len - 1))
+        data ^= g << (pos - (Lg - 1))
 
-received_remainder = format(data & ((1 << (gen_len - 1)) - 1), f'0{gen_l-1}b')
-print("\nThe remainder is:", received_remainder)
-
+rrem = format(data & ((1 << (Lg - 1)) - 1), f'0{Lg-1}b')
+print("\nThe remainder is:", rrem)
 if set(received_remainder) == {'0'}:
     print("DATA SENT SUCCESSFULLY")
 else:
