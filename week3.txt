@@ -1,0 +1,31 @@
+import random
+import time
+
+def sender():
+    frame = 0
+    while frame < 5:
+        print(f"Sender: Sending frame {frame}")
+        
+        if random.randint(0, 9) < 3:
+            print(f"Sender: Frame {frame} lost! Resending...\n")
+            time.sleep(1)
+            continue
+        
+        print(f"Receiver: Frame {frame} received successfully.")
+
+        timeout = random.randint(0, 9)
+        print("Sender: Waiting for acknowledgment...")
+        time.sleep(1)
+        
+        if timeout < 2:
+            print(f"Sender: Timeout occurred! Resending frame {frame}\n")
+            continue
+        
+        ack = input(f"Receiver: Enter 'y' to acknowledge frame {frame}: ")
+        
+        if ack.lower() == 'y':
+            print(f"Sender: Acknowledgment received for frame {frame}\n")
+            frame += 1
+        else:
+            print(f"Sender: Acknowledgment not received. Resending frame {frame}\n")
+sender()
