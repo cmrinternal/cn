@@ -1,21 +1,15 @@
-week4:
 WINDOW_SIZE = 4
 TOTAL_FRAMES = 10
-
 def sender():
-    base = 0
-    next_frame = 0
+    base, next_frame = 0, 0
     while base < TOTAL_FRAMES:
         for i in range(WINDOW_SIZE):
             if next_frame < TOTAL_FRAMES:
                 print(f"Sender: Sending frame {next_frame}")
-                receiver(next_frame)
+                print(f"Receiver: Frame {next_frame} received successfully.")
                 next_frame += 1
-
         for i in range(base, next_frame):
-            ack = input(f"Receiver: Enter 'y' to acknowledge frame {i} (or 'n' to reject): ")
-
-            if ack.lower() == 'y':
+            if input(f"Receiver: Acknowledge frame {i} (y/n): ").lower() == 'y':
                 print(f"Sender: Acknowledgment received for frame {i}")
                 base += 1
             else:
@@ -23,8 +17,4 @@ def sender():
                 next_frame = base
                 break
         print()
-
-def receiver(frame):
-    print(f"Receiver: Frame {frame} received successfully.")
-
 sender()
