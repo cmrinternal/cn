@@ -33,15 +33,11 @@ for i in range(n):
     print()
 
 while True:
-    vertices = input("\nEnter start and end vertex (separated by space): ").split()
-    if len(vertices) == 2 and vertices[0].isdigit() and vertices[1].isdigit():
-        start, end = int(vertices[0]), int(vertices[1])
-        if 0 <= start < n and 0 <= end < n:
-            break
-        else:
-            print(f"Please enter valid vertex numbers between 0 and {n-1}.")
+    start, end = map(int, input("\nEnter start and end vertex (separated by space): ").split())
+    if 0 <= start < n and 0 <= end < n:
+         break
     else:
-        print("Invalid input. Please enter two vertex numbers separated by a space.")
+        print(f"Please enter valid vertex numbers between 0 and {n-1}.")
 
 if path[start][end] == INFINITY:
     print(f"The minimum cost between {start} and {end} is INF")
