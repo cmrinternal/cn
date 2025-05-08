@@ -14,12 +14,12 @@ while i < len(a):
 
 print("DLESTX" + c + "DLEETX")
 bitstufing:
-str = input()
+st = input()
 output = ""
 count = 0
-for i in range(len(str)):
-    output += str[i]
-    if str[i] == '1':
+for i in range(len(st)):
+    output += st[i]
+    if st[i] == '1':
         count += 1
     else:
         count = 0
