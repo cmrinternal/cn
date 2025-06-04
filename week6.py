@@ -28,7 +28,6 @@ def broadcast(graph, current, visited):
         if w and not visited[i]:
             broadcast(graph, i, visited)
 
-# Input
 n = int(input("Enter number of nodes: "))
 graph = [list(map(int, input().split())) for _ in range(n)]
 start = int(input(f"Enter the starting node (0 to {n-1}): "))
