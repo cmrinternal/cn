@@ -6,16 +6,16 @@ def prims_mst(graph, start):
     key = [float('inf')]*n
     parent = [-1]*n
     key[start] = 0
-    min_heap = [(0, start)]
+    mini = [(0, start)]
 
-    while min_heap:
-        _, u = heapq.heappop(min_heap)
+    while mini:
+        _, u = heapq.heappop(mini)
         if visited[u]: continue
         visited[u] = True
         for v, w in enumerate(graph[u]):
             if w and not visited[v] and w < key[v]:
                 key[v], parent[v] = w, u
-                heapq.heappush(min_heap, (key[v], v))
+                heapq.heappush(mini, (key[v], v))
 
     print("\nMinimum Spanning Tree:")
     for i in range(1, n):
