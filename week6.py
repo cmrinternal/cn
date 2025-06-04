@@ -29,7 +29,7 @@ def broadcast(graph, current, visited):
             broadcast(graph, i, visited)
 
 n = int(input("Enter number of nodes: "))
-graph = [list(map(int, input().split())) for _ in range(n)]
+graph = [list(map(int, input().split())) for i in range(n)]
 start = int(input(f"Enter the starting node (0 to {n-1}): "))
 
 prims_mst(graph, start)
